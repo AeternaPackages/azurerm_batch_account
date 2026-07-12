@@ -5,7 +5,7 @@ locals {
     for k1, v1 in var.batch_accounts : {
       for k2, v2 in coalesce(v1.batch_applications, {}) :
       "${k1}/${k2}" => merge(v2, {
-        account_name = module.batch_accounts.batch_accounts["${k1}"].name
+        account_name = module.batch_accounts.batch_accounts_name["${k1}"]
       })
     }
   ]...)
@@ -14,7 +14,7 @@ locals {
     for k1, v1 in var.batch_accounts : {
       for k2, v2 in coalesce(v1.batch_certificates, {}) :
       "${k1}/${k2}" => merge(v2, {
-        account_name = module.batch_accounts.batch_accounts["${k1}"].name
+        account_name = module.batch_accounts.batch_accounts_name["${k1}"]
       })
     }
   ]...)
@@ -23,7 +23,7 @@ locals {
     for k1, v1 in var.batch_accounts : {
       for k2, v2 in coalesce(v1.batch_pools, {}) :
       "${k1}/${k2}" => merge(v2, {
-        account_name = module.batch_accounts.batch_accounts["${k1}"].name
+        account_name = module.batch_accounts.batch_accounts_name["${k1}"]
       })
     }
   ]...)
@@ -32,7 +32,7 @@ locals {
     for k1, v1 in var.batch_accounts : {
       for k2, v2 in coalesce(v1.cosmosdb_cassandra_keyspaces, {}) :
       "${k1}/${k2}" => merge(v2, {
-        account_name = module.batch_accounts.batch_accounts["${k1}"].name
+        account_name = module.batch_accounts.batch_accounts_name["${k1}"]
       })
     }
   ]...)
@@ -41,7 +41,7 @@ locals {
     for k1, v1 in var.batch_accounts : {
       for k2, v2 in coalesce(v1.cosmosdb_gremlin_databases, {}) :
       "${k1}/${k2}" => merge(v2, {
-        account_name = module.batch_accounts.batch_accounts["${k1}"].name
+        account_name = module.batch_accounts.batch_accounts_name["${k1}"]
       })
     }
   ]...)
@@ -50,7 +50,7 @@ locals {
     for k1, v1 in var.batch_accounts : {
       for k2, v2 in coalesce(v1.cosmosdb_gremlin_graphs, {}) :
       "${k1}/${k2}" => merge(v2, {
-        account_name = module.batch_accounts.batch_accounts["${k1}"].name
+        account_name = module.batch_accounts.batch_accounts_name["${k1}"]
       })
     }
   ]...)
@@ -59,7 +59,7 @@ locals {
     for k1, v1 in var.batch_accounts : {
       for k2, v2 in coalesce(v1.cosmosdb_mongo_collections, {}) :
       "${k1}/${k2}" => merge(v2, {
-        account_name = module.batch_accounts.batch_accounts["${k1}"].name
+        account_name = module.batch_accounts.batch_accounts_name["${k1}"]
       })
     }
   ]...)
@@ -68,7 +68,7 @@ locals {
     for k1, v1 in var.batch_accounts : {
       for k2, v2 in coalesce(v1.cosmosdb_mongo_databases, {}) :
       "${k1}/${k2}" => merge(v2, {
-        account_name = module.batch_accounts.batch_accounts["${k1}"].name
+        account_name = module.batch_accounts.batch_accounts_name["${k1}"]
       })
     }
   ]...)
@@ -77,7 +77,7 @@ locals {
     for k1, v1 in var.batch_accounts : {
       for k2, v2 in coalesce(v1.cosmosdb_sql_containers, {}) :
       "${k1}/${k2}" => merge(v2, {
-        account_name = module.batch_accounts.batch_accounts["${k1}"].name
+        account_name = module.batch_accounts.batch_accounts_name["${k1}"]
       })
     }
   ]...)
@@ -86,7 +86,7 @@ locals {
     for k1, v1 in var.batch_accounts : {
       for k2, v2 in coalesce(v1.cosmosdb_sql_databases, {}) :
       "${k1}/${k2}" => merge(v2, {
-        account_name = module.batch_accounts.batch_accounts["${k1}"].name
+        account_name = module.batch_accounts.batch_accounts_name["${k1}"]
       })
     }
   ]...)
@@ -95,7 +95,7 @@ locals {
     for k1, v1 in var.batch_accounts : {
       for k2, v2 in coalesce(v1.cosmosdb_sql_role_assignments, {}) :
       "${k1}/${k2}" => merge(v2, {
-        account_name = module.batch_accounts.batch_accounts["${k1}"].name
+        account_name = module.batch_accounts.batch_accounts_name["${k1}"]
       })
     }
   ]...)
@@ -104,7 +104,7 @@ locals {
     for k1, v1 in var.batch_accounts : {
       for k2, v2 in coalesce(v1.cosmosdb_sql_role_definitions, {}) :
       "${k1}/${k2}" => merge(v2, {
-        account_name = module.batch_accounts.batch_accounts["${k1}"].name
+        account_name = module.batch_accounts.batch_accounts_name["${k1}"]
       })
     }
   ]...)
@@ -113,7 +113,7 @@ locals {
     for k1, v1 in var.batch_accounts : {
       for k2, v2 in coalesce(v1.cosmosdb_sql_stored_procedures, {}) :
       "${k1}/${k2}" => merge(v2, {
-        account_name = module.batch_accounts.batch_accounts["${k1}"].name
+        account_name = module.batch_accounts.batch_accounts_name["${k1}"]
       })
     }
   ]...)
@@ -122,7 +122,7 @@ locals {
     for k1, v1 in var.batch_accounts : {
       for k2, v2 in coalesce(v1.cosmosdb_tables, {}) :
       "${k1}/${k2}" => merge(v2, {
-        account_name = module.batch_accounts.batch_accounts["${k1}"].name
+        account_name = module.batch_accounts.batch_accounts_name["${k1}"]
       })
     }
   ]...)
@@ -131,7 +131,7 @@ locals {
     for k1, v1 in var.batch_accounts : {
       for k2, v2 in coalesce(v1.netapp_backup_policies, {}) :
       "${k1}/${k2}" => merge(v2, {
-        account_name = module.batch_accounts.batch_accounts["${k1}"].name
+        account_name = module.batch_accounts.batch_accounts_name["${k1}"]
       })
     }
   ]...)
@@ -140,7 +140,7 @@ locals {
     for k1, v1 in var.batch_accounts : {
       for k2, v2 in coalesce(v1.netapp_backup_vaults, {}) :
       "${k1}/${k2}" => merge(v2, {
-        account_name = module.batch_accounts.batch_accounts["${k1}"].name
+        account_name = module.batch_accounts.batch_accounts_name["${k1}"]
       })
     }
   ]...)
@@ -149,7 +149,7 @@ locals {
     for k1, v1 in var.batch_accounts : {
       for k2, v2 in coalesce(v1.netapp_pools, {}) :
       "${k1}/${k2}" => merge(v2, {
-        account_name = module.batch_accounts.batch_accounts["${k1}"].name
+        account_name = module.batch_accounts.batch_accounts_name["${k1}"]
       })
     }
   ]...)
@@ -158,7 +158,7 @@ locals {
     for k1, v1 in var.batch_accounts : {
       for k2, v2 in coalesce(v1.netapp_snapshots, {}) :
       "${k1}/${k2}" => merge(v2, {
-        account_name = module.batch_accounts.batch_accounts["${k1}"].name
+        account_name = module.batch_accounts.batch_accounts_name["${k1}"]
       })
     }
   ]...)
@@ -167,7 +167,7 @@ locals {
     for k1, v1 in var.batch_accounts : {
       for k2, v2 in coalesce(v1.netapp_snapshot_policies, {}) :
       "${k1}/${k2}" => merge(v2, {
-        account_name = module.batch_accounts.batch_accounts["${k1}"].name
+        account_name = module.batch_accounts.batch_accounts_name["${k1}"]
       })
     }
   ]...)
@@ -176,7 +176,7 @@ locals {
     for k1, v1 in var.batch_accounts : {
       for k2, v2 in coalesce(v1.netapp_volumes, {}) :
       "${k1}/${k2}" => merge(v2, {
-        account_name = module.batch_accounts.batch_accounts["${k1}"].name
+        account_name = module.batch_accounts.batch_accounts_name["${k1}"]
       })
     }
   ]...)
@@ -185,7 +185,7 @@ locals {
     for k1, v1 in var.batch_accounts : {
       for k2, v2 in coalesce(v1.netapp_volume_group_oracles, {}) :
       "${k1}/${k2}" => merge(v2, {
-        account_name = module.batch_accounts.batch_accounts["${k1}"].name
+        account_name = module.batch_accounts.batch_accounts_name["${k1}"]
       })
     }
   ]...)
@@ -194,7 +194,7 @@ locals {
     for k1, v1 in var.batch_accounts : {
       for k2, v2 in coalesce(v1.netapp_volume_group_sap_hanas, {}) :
       "${k1}/${k2}" => merge(v2, {
-        account_name = module.batch_accounts.batch_accounts["${k1}"].name
+        account_name = module.batch_accounts.batch_accounts_name["${k1}"]
       })
     }
   ]...)
@@ -204,7 +204,7 @@ locals {
       for k2, v2 in coalesce(v1.batch_pools, {}) : {
         for k3, v3 in coalesce(v2.batch_jobs, {}) :
         "${k1}/${k2}/${k3}" => merge(v3, {
-          batch_pool_id = module.batch_pools.batch_pools["${k1}/${k2}"].id
+          batch_pool_id = module.batch_pools.batch_pools_id["${k1}/${k2}"]
         })
       }
     ]...)
