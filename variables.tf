@@ -304,17 +304,17 @@ EOT
     network_profile = optional(object({
       account_access = optional(object({
         default_action = optional(string) # Default: "Deny"
-        ip_rule = optional(object({
+        ip_rule = optional(list(object({
           action   = optional(string) # Default: "Allow"
           ip_range = string
-        }))
+        })))
       }))
       node_management_access = optional(object({
         default_action = optional(string) # Default: "Deny"
-        ip_rule = optional(object({
+        ip_rule = optional(list(object({
           action   = optional(string) # Default: "Allow"
           ip_range = string
-        }))
+        })))
       }))
     }))
     batch_applications = optional(map(object({
@@ -352,24 +352,24 @@ EOT
         sku       = optional(string)
         version   = optional(string)
       })
-      task_scheduling_policy = optional(object({
+      task_scheduling_policy = optional(list(object({
         node_fill_type = optional(string)
-      }))
+      })))
       start_task = optional(object({
         command_line                  = string
         common_environment_properties = optional(map(string))
-        container = optional(object({
+        container = optional(list(object({
           image_name = string
-          registry = optional(object({
+          registry = optional(list(object({
             password                  = optional(string)
             registry_server           = string
             user_assigned_identity_id = optional(string)
             user_name                 = optional(string)
-          }))
+          })))
           run_options       = optional(string)
           working_directory = optional(string)
-        }))
-        resource_file = optional(object({
+        })))
+        resource_file = optional(list(object({
           auto_storage_container_name = optional(string)
           blob_prefix                 = optional(string)
           file_mode                   = optional(string)
@@ -377,7 +377,7 @@ EOT
           http_url                    = optional(string)
           storage_container_url       = optional(string)
           user_assigned_identity_id   = optional(string)
-        }))
+        })))
         task_retry_maximum = optional(number)
         user_identity = object({
           auto_user = optional(object({
@@ -394,29 +394,29 @@ EOT
         security_type           = optional(string)
         vtpm_enabled            = optional(bool)
       }))
-      node_placement = optional(object({
+      node_placement = optional(list(object({
         policy = optional(string) # Default: "Regional"
-      }))
+      })))
       network_configuration = optional(object({
         accelerated_networking_enabled = optional(bool)   # Default: false
         dynamic_vnet_assignment_scope  = optional(string) # Default: "none"
-        endpoint_configuration = optional(object({
+        endpoint_configuration = optional(list(object({
           backend_port        = number
           frontend_port_range = string
           name                = string
-          network_security_group_rules = optional(object({
+          network_security_group_rules = optional(list(object({
             access                = string
             priority              = number
             source_address_prefix = string
             source_port_ranges    = optional(list(string))
-          }))
+          })))
           protocol = string
-        }))
+        })))
         public_address_provisioning_type = optional(string)
         public_ips                       = optional(set(string))
         subnet_id                        = optional(string)
       }))
-      mount = optional(object({
+      mount = optional(list(object({
         azure_blob_file_system = optional(object({
           account_key         = optional(string)
           account_name        = string
@@ -426,44 +426,44 @@ EOT
           relative_mount_path = string
           sas_key             = optional(string)
         }))
-        azure_file_share = optional(object({
+        azure_file_share = optional(list(object({
           account_key         = string
           account_name        = string
           azure_file_url      = string
           mount_options       = optional(string)
           relative_mount_path = string
-        }))
-        cifs_mount = optional(object({
+        })))
+        cifs_mount = optional(list(object({
           mount_options       = optional(string)
           password            = string
           relative_mount_path = string
           source              = string
           user_name           = string
-        }))
-        nfs_mount = optional(object({
+        })))
+        nfs_mount = optional(list(object({
           mount_options       = optional(string)
           relative_mount_path = string
           source              = string
-        }))
-      }))
-      user_accounts = optional(object({
+        })))
+      })))
+      user_accounts = optional(list(object({
         elevation_level = string
-        linux_user_configuration = optional(object({
+        linux_user_configuration = optional(list(object({
           gid             = optional(number)
           ssh_private_key = optional(string)
           uid             = optional(number)
-        }))
+        })))
         name     = string
         password = string
-        windows_user_configuration = optional(object({
+        windows_user_configuration = optional(list(object({
           login_mode = string
-        }))
-      }))
+        })))
+      })))
       identity = optional(object({
         identity_ids = set(string)
         type         = string
       }))
-      extensions = optional(object({
+      extensions = optional(list(object({
         auto_upgrade_minor_version = optional(bool)
         automatic_upgrade_enabled  = optional(bool)
         name                       = string
@@ -473,32 +473,32 @@ EOT
         settings_json              = optional(string)
         type                       = string
         type_handler_version       = optional(string)
-      }))
-      disk_encryption = optional(object({
+      })))
+      disk_encryption = optional(list(object({
         disk_encryption_target = string
-      }))
-      data_disks = optional(object({
+      })))
+      data_disks = optional(list(object({
         caching              = optional(string) # Default: "ReadOnly"
         disk_size_gb         = number
         lun                  = number
         storage_account_type = optional(string) # Default: "Standard_LRS"
-      }))
+      })))
       container_configuration = optional(object({
         container_image_names = optional(set(string))
-        container_registries = optional(object({
+        container_registries = optional(list(object({
           password                  = optional(string)
           registry_server           = string
           user_assigned_identity_id = optional(string)
           user_name                 = optional(string)
-        }))
+        })))
         type = optional(string)
       }))
-      certificate = optional(object({
+      certificate = optional(list(object({
         id             = string
         store_location = string
         store_name     = optional(string)
         visibility     = optional(set(string))
-      }))
+      })))
       auto_scale = optional(object({
         evaluation_interval = optional(string) # Default: "PT15M"
         formula             = string
@@ -509,9 +509,9 @@ EOT
         target_dedicated_nodes    = optional(number) # Default: 1
         target_low_priority_nodes = optional(number) # Default: 0
       }))
-      windows = optional(object({
+      windows = optional(list(object({
         enable_automatic_updates = optional(bool) # Default: true
-      }))
+      })))
       batch_jobs = optional(map(object({
         name                          = string
         common_environment_properties = optional(map(string))
@@ -555,22 +555,22 @@ EOT
       }))
       index_policy = optional(object({
         automatic = optional(bool) # Default: true
-        composite_index = optional(object({
+        composite_index = optional(list(object({
           index = list(object({
             order = string
             path  = string
           }))
-        }))
+        })))
         excluded_paths = optional(set(string))
         included_paths = optional(set(string))
         indexing_mode  = string
-        spatial_index = optional(object({
+        spatial_index = optional(list(object({
           path = string
-        }))
+        })))
       }))
-      unique_key = optional(object({
+      unique_key = optional(list(object({
         paths = set(string)
-      }))
+      })))
     })))
     cosmosdb_mongo_collections = optional(map(object({
       database_name          = string
@@ -583,10 +583,10 @@ EOT
       autoscale_settings = optional(object({
         max_throughput = optional(number)
       }))
-      index = optional(object({
+      index = optional(list(object({
         keys   = list(string)
         unique = optional(bool) # Default: false
-      }))
+      })))
     })))
     cosmosdb_mongo_databases = optional(map(object({
       name                = string
@@ -615,26 +615,26 @@ EOT
         mode                          = string
       }))
       indexing_policy = optional(object({
-        composite_index = optional(object({
+        composite_index = optional(list(object({
           index = list(object({
             order = string
             path  = string
           }))
-        }))
-        excluded_path = optional(object({
+        })))
+        excluded_path = optional(list(object({
           path = string
-        }))
-        included_path = optional(object({
+        })))
+        included_path = optional(list(object({
           path = string
-        }))
+        })))
         indexing_mode = optional(string) # Default: "consistent"
-        spatial_index = optional(object({
+        spatial_index = optional(list(object({
           path = string
-        }))
+        })))
       }))
-      unique_key = optional(object({
+      unique_key = optional(list(object({
         paths = set(string)
-      }))
+      })))
     })))
     cosmosdb_sql_databases = optional(map(object({
       name                = string
@@ -657,9 +657,9 @@ EOT
       resource_group_name = string
       role_definition_id  = optional(string)
       type                = optional(string) # Default: "CustomRole"
-      permissions = object({
+      permissions = list(object({
         data_actions = set(string)
-      })
+      }))
     })))
     cosmosdb_sql_stored_procedures = optional(map(object({
       body                = string
