@@ -28,12 +28,16 @@ Nested batch_applications (azurerm_batch_application):
 Nested batch_certificates (azurerm_batch_certificate):
     Required:
         - certificate
+        - certificate_key_vault_id (alternative to certificate - read from Key Vault instead)
+        - certificate_key_vault_secret_name (alternative to certificate - read from Key Vault instead)
         - format
         - resource_group_name
         - thumbprint
         - thumbprint_algorithm
     Optional:
         - password
+        - password_key_vault_id (alternative to password - read from Key Vault instead)
+        - password_key_vault_secret_name (alternative to password - read from Key Vault instead)
 Nested batch_pools (azurerm_batch_pool):
     Required:
         - name
@@ -325,12 +329,16 @@ EOT
       display_name        = optional(string)
     })))
     batch_certificates = optional(map(object({
-      certificate          = string
-      format               = string
-      resource_group_name  = string
-      thumbprint           = string
-      thumbprint_algorithm = string
-      password             = optional(string)
+      certificate                       = string
+      certificate_key_vault_id          = optional(string)
+      certificate_key_vault_secret_name = optional(string)
+      format                            = string
+      resource_group_name               = string
+      thumbprint                        = string
+      thumbprint_algorithm              = string
+      password                          = optional(string)
+      password_key_vault_id             = optional(string)
+      password_key_vault_secret_name    = optional(string)
     })))
     batch_pools = optional(map(object({
       name                           = string
