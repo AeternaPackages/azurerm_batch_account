@@ -1,4 +1,9 @@
 # --- azurerm_batch_account ---
+output "batch_accounts_id" {
+  description = "Map of id values across all batch_accounts, keyed the same as var.batch_accounts"
+  value       = module.batch_accounts.batch_accounts_id
+}
+
 output "batch_accounts_account_endpoint" {
   description = "Map of account_endpoint values across all batch_accounts, keyed the same as var.batch_accounts"
   value       = module.batch_accounts.batch_accounts_account_endpoint
@@ -87,6 +92,11 @@ output "batch_accounts_tags" {
 }
 
 # --- azurerm_batch_application ---
+output "batch_applications_id" {
+  description = "Map of id values across all batch_applications, keyed the same as var.batch_applications"
+  value       = module.batch_applications.batch_applications_id
+}
+
 output "batch_applications_account_name" {
   description = "Map of account_name values across all batch_applications, keyed the same as var.batch_applications"
   value       = module.batch_applications.batch_applications_account_name
@@ -118,6 +128,11 @@ output "batch_applications_resource_group_name" {
 }
 
 # --- azurerm_batch_certificate ---
+output "batch_certificates_id" {
+  description = "Map of id values across all batch_certificates, keyed the same as var.batch_certificates"
+  value       = module.batch_certificates.batch_certificates_id
+}
+
 output "batch_certificates_account_name" {
   description = "Map of account_name values across all batch_certificates, keyed the same as var.batch_certificates"
   value       = module.batch_certificates.batch_certificates_account_name
@@ -166,6 +181,11 @@ output "batch_certificates_thumbprint_algorithm" {
 }
 
 # --- azurerm_batch_pool ---
+output "batch_pools_id" {
+  description = "Map of id values across all batch_pools, keyed the same as var.batch_pools"
+  value       = module.batch_pools.batch_pools_id
+}
+
 output "batch_pools_account_name" {
   description = "Map of account_name values across all batch_pools, keyed the same as var.batch_pools"
   value       = module.batch_pools.batch_pools_account_name
@@ -321,6 +341,11 @@ output "batch_pools_windows" {
 }
 
 # --- azurerm_cosmosdb_cassandra_keyspace ---
+output "cosmosdb_cassandra_keyspaces_id" {
+  description = "Map of id values across all cosmosdb_cassandra_keyspaces, keyed the same as var.cosmosdb_cassandra_keyspaces"
+  value       = module.cosmosdb_cassandra_keyspaces.cosmosdb_cassandra_keyspaces_id
+}
+
 output "cosmosdb_cassandra_keyspaces_account_name" {
   description = "Map of account_name values across all cosmosdb_cassandra_keyspaces, keyed the same as var.cosmosdb_cassandra_keyspaces"
   value       = module.cosmosdb_cassandra_keyspaces.cosmosdb_cassandra_keyspaces_account_name
@@ -347,6 +372,11 @@ output "cosmosdb_cassandra_keyspaces_throughput" {
 }
 
 # --- azurerm_cosmosdb_gremlin_database ---
+output "cosmosdb_gremlin_databases_id" {
+  description = "Map of id values across all cosmosdb_gremlin_databases, keyed the same as var.cosmosdb_gremlin_databases"
+  value       = module.cosmosdb_gremlin_databases.cosmosdb_gremlin_databases_id
+}
+
 output "cosmosdb_gremlin_databases_account_name" {
   description = "Map of account_name values across all cosmosdb_gremlin_databases, keyed the same as var.cosmosdb_gremlin_databases"
   value       = module.cosmosdb_gremlin_databases.cosmosdb_gremlin_databases_account_name
@@ -373,6 +403,11 @@ output "cosmosdb_gremlin_databases_throughput" {
 }
 
 # --- azurerm_cosmosdb_gremlin_graph ---
+output "cosmosdb_gremlin_graphs_id" {
+  description = "Map of id values across all cosmosdb_gremlin_graphs, keyed the same as var.cosmosdb_gremlin_graphs"
+  value       = module.cosmosdb_gremlin_graphs.cosmosdb_gremlin_graphs_id
+}
+
 output "cosmosdb_gremlin_graphs_account_name" {
   description = "Map of account_name values across all cosmosdb_gremlin_graphs, keyed the same as var.cosmosdb_gremlin_graphs"
   value       = module.cosmosdb_gremlin_graphs.cosmosdb_gremlin_graphs_account_name
@@ -439,6 +474,11 @@ output "cosmosdb_gremlin_graphs_unique_key" {
 }
 
 # --- azurerm_cosmosdb_mongo_collection ---
+output "cosmosdb_mongo_collections_id" {
+  description = "Map of id values across all cosmosdb_mongo_collections, keyed the same as var.cosmosdb_mongo_collections"
+  value       = module.cosmosdb_mongo_collections.cosmosdb_mongo_collections_id
+}
+
 output "cosmosdb_mongo_collections_account_name" {
   description = "Map of account_name values across all cosmosdb_mongo_collections, keyed the same as var.cosmosdb_mongo_collections"
   value       = module.cosmosdb_mongo_collections.cosmosdb_mongo_collections_account_name
@@ -495,6 +535,11 @@ output "cosmosdb_mongo_collections_throughput" {
 }
 
 # --- azurerm_cosmosdb_mongo_database ---
+output "cosmosdb_mongo_databases_id" {
+  description = "Map of id values across all cosmosdb_mongo_databases, keyed the same as var.cosmosdb_mongo_databases"
+  value       = module.cosmosdb_mongo_databases.cosmosdb_mongo_databases_id
+}
+
 output "cosmosdb_mongo_databases_account_name" {
   description = "Map of account_name values across all cosmosdb_mongo_databases, keyed the same as var.cosmosdb_mongo_databases"
   value       = module.cosmosdb_mongo_databases.cosmosdb_mongo_databases_account_name
@@ -521,6 +566,11 @@ output "cosmosdb_mongo_databases_throughput" {
 }
 
 # --- azurerm_cosmosdb_sql_container ---
+output "cosmosdb_sql_containers_id" {
+  description = "Map of id values across all cosmosdb_sql_containers, keyed the same as var.cosmosdb_sql_containers"
+  value       = module.cosmosdb_sql_containers.cosmosdb_sql_containers_id
+}
+
 output "cosmosdb_sql_containers_account_name" {
   description = "Map of account_name values across all cosmosdb_sql_containers, keyed the same as var.cosmosdb_sql_containers"
   value       = module.cosmosdb_sql_containers.cosmosdb_sql_containers_account_name
@@ -592,6 +642,11 @@ output "cosmosdb_sql_containers_unique_key" {
 }
 
 # --- azurerm_cosmosdb_sql_database ---
+output "cosmosdb_sql_databases_id" {
+  description = "Map of id values across all cosmosdb_sql_databases, keyed the same as var.cosmosdb_sql_databases"
+  value       = module.cosmosdb_sql_databases.cosmosdb_sql_databases_id
+}
+
 output "cosmosdb_sql_databases_account_name" {
   description = "Map of account_name values across all cosmosdb_sql_databases, keyed the same as var.cosmosdb_sql_databases"
   value       = module.cosmosdb_sql_databases.cosmosdb_sql_databases_account_name
@@ -618,6 +673,11 @@ output "cosmosdb_sql_databases_throughput" {
 }
 
 # --- azurerm_cosmosdb_sql_role_assignment ---
+output "cosmosdb_sql_role_assignments_id" {
+  description = "Map of id values across all cosmosdb_sql_role_assignments, keyed the same as var.cosmosdb_sql_role_assignments"
+  value       = module.cosmosdb_sql_role_assignments.cosmosdb_sql_role_assignments_id
+}
+
 output "cosmosdb_sql_role_assignments_account_name" {
   description = "Map of account_name values across all cosmosdb_sql_role_assignments, keyed the same as var.cosmosdb_sql_role_assignments"
   value       = module.cosmosdb_sql_role_assignments.cosmosdb_sql_role_assignments_account_name
@@ -649,6 +709,11 @@ output "cosmosdb_sql_role_assignments_scope" {
 }
 
 # --- azurerm_cosmosdb_sql_role_definition ---
+output "cosmosdb_sql_role_definitions_id" {
+  description = "Map of id values across all cosmosdb_sql_role_definitions, keyed the same as var.cosmosdb_sql_role_definitions"
+  value       = module.cosmosdb_sql_role_definitions.cosmosdb_sql_role_definitions_id
+}
+
 output "cosmosdb_sql_role_definitions_account_name" {
   description = "Map of account_name values across all cosmosdb_sql_role_definitions, keyed the same as var.cosmosdb_sql_role_definitions"
   value       = module.cosmosdb_sql_role_definitions.cosmosdb_sql_role_definitions_account_name
@@ -685,6 +750,11 @@ output "cosmosdb_sql_role_definitions_type" {
 }
 
 # --- azurerm_cosmosdb_sql_stored_procedure ---
+output "cosmosdb_sql_stored_procedures_id" {
+  description = "Map of id values across all cosmosdb_sql_stored_procedures, keyed the same as var.cosmosdb_sql_stored_procedures"
+  value       = module.cosmosdb_sql_stored_procedures.cosmosdb_sql_stored_procedures_id
+}
+
 output "cosmosdb_sql_stored_procedures_account_name" {
   description = "Map of account_name values across all cosmosdb_sql_stored_procedures, keyed the same as var.cosmosdb_sql_stored_procedures"
   value       = module.cosmosdb_sql_stored_procedures.cosmosdb_sql_stored_procedures_account_name
@@ -716,6 +786,11 @@ output "cosmosdb_sql_stored_procedures_resource_group_name" {
 }
 
 # --- azurerm_cosmosdb_table ---
+output "cosmosdb_tables_id" {
+  description = "Map of id values across all cosmosdb_tables, keyed the same as var.cosmosdb_tables"
+  value       = module.cosmosdb_tables.cosmosdb_tables_id
+}
+
 output "cosmosdb_tables_account_name" {
   description = "Map of account_name values across all cosmosdb_tables, keyed the same as var.cosmosdb_tables"
   value       = module.cosmosdb_tables.cosmosdb_tables_account_name
@@ -742,6 +817,11 @@ output "cosmosdb_tables_throughput" {
 }
 
 # --- azurerm_netapp_backup_policy ---
+output "netapp_backup_policies_id" {
+  description = "Map of id values across all netapp_backup_policies, keyed the same as var.netapp_backup_policies"
+  value       = module.netapp_backup_policies.netapp_backup_policies_id
+}
+
 output "netapp_backup_policies_account_name" {
   description = "Map of account_name values across all netapp_backup_policies, keyed the same as var.netapp_backup_policies"
   value       = module.netapp_backup_policies.netapp_backup_policies_account_name
@@ -788,6 +868,11 @@ output "netapp_backup_policies_weekly_backups_to_keep" {
 }
 
 # --- azurerm_netapp_backup_vault ---
+output "netapp_backup_vaults_id" {
+  description = "Map of id values across all netapp_backup_vaults, keyed the same as var.netapp_backup_vaults"
+  value       = module.netapp_backup_vaults.netapp_backup_vaults_id
+}
+
 output "netapp_backup_vaults_account_name" {
   description = "Map of account_name values across all netapp_backup_vaults, keyed the same as var.netapp_backup_vaults"
   value       = module.netapp_backup_vaults.netapp_backup_vaults_account_name
@@ -814,6 +899,11 @@ output "netapp_backup_vaults_tags" {
 }
 
 # --- azurerm_netapp_pool ---
+output "netapp_pools_id" {
+  description = "Map of id values across all netapp_pools, keyed the same as var.netapp_pools"
+  value       = module.netapp_pools.netapp_pools_id
+}
+
 output "netapp_pools_account_name" {
   description = "Map of account_name values across all netapp_pools, keyed the same as var.netapp_pools"
   value       = module.netapp_pools.netapp_pools_account_name
@@ -870,6 +960,11 @@ output "netapp_pools_tags" {
 }
 
 # --- azurerm_netapp_snapshot ---
+output "netapp_snapshots_id" {
+  description = "Map of id values across all netapp_snapshots, keyed the same as var.netapp_snapshots"
+  value       = module.netapp_snapshots.netapp_snapshots_id
+}
+
 output "netapp_snapshots_account_name" {
   description = "Map of account_name values across all netapp_snapshots, keyed the same as var.netapp_snapshots"
   value       = module.netapp_snapshots.netapp_snapshots_account_name
@@ -901,6 +996,11 @@ output "netapp_snapshots_volume_name" {
 }
 
 # --- azurerm_netapp_snapshot_policy ---
+output "netapp_snapshot_policies_id" {
+  description = "Map of id values across all netapp_snapshot_policies, keyed the same as var.netapp_snapshot_policies"
+  value       = module.netapp_snapshot_policies.netapp_snapshot_policies_id
+}
+
 output "netapp_snapshot_policies_account_name" {
   description = "Map of account_name values across all netapp_snapshot_policies, keyed the same as var.netapp_snapshot_policies"
   value       = module.netapp_snapshot_policies.netapp_snapshot_policies_account_name
@@ -952,6 +1052,11 @@ output "netapp_snapshot_policies_weekly_schedule" {
 }
 
 # --- azurerm_netapp_volume ---
+output "netapp_volumes_id" {
+  description = "Map of id values across all netapp_volumes, keyed the same as var.netapp_volumes"
+  value       = module.netapp_volumes.netapp_volumes_id
+}
+
 output "netapp_volumes_accept_grow_capacity_pool_for_short_term_clone_split" {
   description = "Map of accept_grow_capacity_pool_for_short_term_clone_split values across all netapp_volumes, keyed the same as var.netapp_volumes"
   value       = module.netapp_volumes.netapp_volumes_accept_grow_capacity_pool_for_short_term_clone_split
@@ -1123,6 +1228,11 @@ output "netapp_volumes_zone" {
 }
 
 # --- azurerm_netapp_volume_group_oracle ---
+output "netapp_volume_group_oracles_id" {
+  description = "Map of id values across all netapp_volume_group_oracles, keyed the same as var.netapp_volume_group_oracles"
+  value       = module.netapp_volume_group_oracles.netapp_volume_group_oracles_id
+}
+
 output "netapp_volume_group_oracles_account_name" {
   description = "Map of account_name values across all netapp_volume_group_oracles, keyed the same as var.netapp_volume_group_oracles"
   value       = module.netapp_volume_group_oracles.netapp_volume_group_oracles_account_name
@@ -1159,6 +1269,11 @@ output "netapp_volume_group_oracles_volume" {
 }
 
 # --- azurerm_netapp_volume_group_sap_hana ---
+output "netapp_volume_group_sap_hanas_id" {
+  description = "Map of id values across all netapp_volume_group_sap_hanas, keyed the same as var.netapp_volume_group_sap_hanas"
+  value       = module.netapp_volume_group_sap_hanas.netapp_volume_group_sap_hanas_id
+}
+
 output "netapp_volume_group_sap_hanas_account_name" {
   description = "Map of account_name values across all netapp_volume_group_sap_hanas, keyed the same as var.netapp_volume_group_sap_hanas"
   value       = module.netapp_volume_group_sap_hanas.netapp_volume_group_sap_hanas_account_name
@@ -1195,6 +1310,11 @@ output "netapp_volume_group_sap_hanas_volume" {
 }
 
 # --- azurerm_batch_job ---
+output "batch_jobs_id" {
+  description = "Map of id values across all batch_jobs, keyed the same as var.batch_jobs"
+  value       = module.batch_jobs.batch_jobs_id
+}
+
 output "batch_jobs_batch_pool_id" {
   description = "Map of batch_pool_id values across all batch_jobs, keyed the same as var.batch_jobs"
   value       = module.batch_jobs.batch_jobs_batch_pool_id
