@@ -288,15 +288,15 @@ EOT
     name                                = string
     resource_group_name                 = string
     allowed_authentication_modes        = optional(set(string))
-    pool_allocation_mode                = optional(string) # Default: "BatchService"
-    public_network_access_enabled       = optional(bool)   # Default: true
+    pool_allocation_mode                = optional(string)
+    public_network_access_enabled       = optional(bool)
     storage_account_authentication_mode = optional(string)
     storage_account_id                  = optional(string)
     storage_account_node_identity       = optional(string)
     tags                                = optional(map(string))
-    encryption = optional(object({
-      key_vault_key_id = string
-    }))
+    encryption = optional(list(object({
+      key_vault_key_id = optional(string)
+    })))
     identity = optional(object({
       identity_ids = optional(set(string))
       type         = string
@@ -307,16 +307,16 @@ EOT
     }))
     network_profile = optional(object({
       account_access = optional(object({
-        default_action = optional(string) # Default: "Deny"
+        default_action = optional(string)
         ip_rule = optional(list(object({
-          action   = optional(string) # Default: "Allow"
+          action   = optional(string)
           ip_range = string
         })))
       }))
       node_management_access = optional(object({
-        default_action = optional(string) # Default: "Deny"
+        default_action = optional(string)
         ip_rule = optional(list(object({
-          action   = optional(string) # Default: "Allow"
+          action   = optional(string)
           ip_range = string
         })))
       }))
@@ -324,7 +324,7 @@ EOT
     batch_applications = optional(map(object({
       name                = string
       resource_group_name = string
-      allow_updates       = optional(bool) # Default: true
+      allow_updates       = optional(bool)
       default_version     = optional(string)
       display_name        = optional(string)
     })))
@@ -346,12 +346,12 @@ EOT
       resource_group_name            = string
       vm_size                        = string
       display_name                   = optional(string)
-      inter_node_communication       = optional(string) # Default: "Enabled"
+      inter_node_communication       = optional(string)
       license_type                   = optional(string)
-      max_tasks_per_node             = optional(number) # Default: 1
+      max_tasks_per_node             = optional(number)
       metadata                       = optional(map(string))
       os_disk_placement              = optional(string)
-      stop_pending_resize_operation  = optional(bool) # Default: false
+      stop_pending_resize_operation  = optional(bool)
       target_node_communication_mode = optional(string)
       storage_image_reference = object({
         id        = optional(string)
@@ -389,12 +389,12 @@ EOT
         task_retry_maximum = optional(number)
         user_identity = object({
           auto_user = optional(object({
-            elevation_level = optional(string) # Default: "NonAdmin"
-            scope           = optional(string) # Default: "Task"
+            elevation_level = optional(string)
+            scope           = optional(string)
           }))
           user_name = optional(string)
         })
-        wait_for_success = optional(bool) # Default: false
+        wait_for_success = optional(bool)
       }))
       security_profile = optional(object({
         host_encryption_enabled = optional(bool)
@@ -403,11 +403,11 @@ EOT
         vtpm_enabled            = optional(bool)
       }))
       node_placement = optional(list(object({
-        policy = optional(string) # Default: "Regional"
+        policy = optional(string)
       })))
       network_configuration = optional(object({
-        accelerated_networking_enabled = optional(bool)   # Default: false
-        dynamic_vnet_assignment_scope  = optional(string) # Default: "none"
+        accelerated_networking_enabled = optional(bool)
+        dynamic_vnet_assignment_scope  = optional(string)
         endpoint_configuration = optional(list(object({
           backend_port        = number
           frontend_port_range = string
@@ -486,16 +486,16 @@ EOT
         disk_encryption_target = string
       })))
       data_disks = optional(list(object({
-        caching              = optional(string) # Default: "ReadOnly"
+        caching              = optional(string)
         disk_size_gb         = number
         lun                  = number
-        storage_account_type = optional(string) # Default: "Standard_LRS"
+        storage_account_type = optional(string)
       })))
       container_configuration = optional(object({
         container_image_names = optional(set(string))
         container_registries = optional(list(object({
           password                  = optional(string)
-          registry_server           = string
+          registry_server           = optional(string)
           user_assigned_identity_id = optional(string)
           user_name                 = optional(string)
         })))
@@ -508,23 +508,23 @@ EOT
         visibility     = optional(set(string))
       })))
       auto_scale = optional(object({
-        evaluation_interval = optional(string) # Default: "PT15M"
+        evaluation_interval = optional(string)
         formula             = string
       }))
       fixed_scale = optional(object({
         node_deallocation_method  = optional(string)
-        resize_timeout            = optional(string) # Default: "PT15M"
-        target_dedicated_nodes    = optional(number) # Default: 1
-        target_low_priority_nodes = optional(number) # Default: 0
+        resize_timeout            = optional(string)
+        target_dedicated_nodes    = optional(number)
+        target_low_priority_nodes = optional(number)
       }))
       windows = optional(list(object({
-        enable_automatic_updates = optional(bool) # Default: true
+        enable_automatic_updates = optional(bool)
       })))
       batch_jobs = optional(map(object({
         name                          = string
         common_environment_properties = optional(map(string))
         display_name                  = optional(string)
-        priority                      = optional(number) # Default: 0
+        priority                      = optional(number)
         task_retry_maximum            = optional(number)
       })))
     })))
@@ -562,7 +562,7 @@ EOT
         mode                          = string
       }))
       index_policy = optional(object({
-        automatic = optional(bool) # Default: true
+        automatic = optional(bool)
         composite_index = optional(list(object({
           index = list(object({
             order = string
@@ -593,7 +593,7 @@ EOT
       }))
       index = optional(list(object({
         keys   = list(string)
-        unique = optional(bool) # Default: false
+        unique = optional(bool)
       })))
     })))
     cosmosdb_mongo_databases = optional(map(object({
@@ -611,7 +611,7 @@ EOT
       resource_group_name    = string
       analytical_storage_ttl = optional(number)
       default_ttl            = optional(number)
-      partition_key_kind     = optional(string) # Default: "Hash"
+      partition_key_kind     = optional(string)
       partition_key_version  = optional(number)
       throughput             = optional(number)
       autoscale_settings = optional(object({
@@ -635,7 +635,7 @@ EOT
         included_path = optional(list(object({
           path = string
         })))
-        indexing_mode = optional(string) # Default: "consistent"
+        indexing_mode = optional(string)
         spatial_index = optional(list(object({
           path = string
         })))
@@ -664,7 +664,7 @@ EOT
       name                = string
       resource_group_name = string
       role_definition_id  = optional(string)
-      type                = optional(string) # Default: "CustomRole"
+      type                = optional(string)
       permissions = list(object({
         data_actions = set(string)
       }))
@@ -688,11 +688,11 @@ EOT
       location                = string
       name                    = string
       resource_group_name     = string
-      daily_backups_to_keep   = optional(number) # Default: 2
-      enabled                 = optional(bool)   # Default: true
-      monthly_backups_to_keep = optional(number) # Default: 1
+      daily_backups_to_keep   = optional(number)
+      enabled                 = optional(bool)
+      monthly_backups_to_keep = optional(number)
       tags                    = optional(map(string))
-      weekly_backups_to_keep  = optional(number) # Default: 1
+      weekly_backups_to_keep  = optional(number)
     })))
     netapp_backup_vaults = optional(map(object({
       location            = string
@@ -706,10 +706,10 @@ EOT
       resource_group_name     = string
       service_level           = string
       size_in_tb              = number
-      cool_access_enabled     = optional(bool) # Default: false
+      cool_access_enabled     = optional(bool)
       custom_throughput_mibps = optional(number)
-      encryption_type         = optional(string) # Default: "Single"
-      qos_type                = optional(string) # Default: "Auto"
+      encryption_type         = optional(string)
+      qos_type                = optional(string)
       tags                    = optional(map(string))
     })))
     netapp_snapshots = optional(map(object({
@@ -757,20 +757,20 @@ EOT
       subnet_id                                            = string
       volume_path                                          = string
       tags                                                 = optional(map(string))
-      snapshot_directory_visible                           = optional(bool) # Default: true
-      smb_non_browsable_enabled                            = optional(bool) # Default: false
+      snapshot_directory_visible                           = optional(bool)
+      smb_non_browsable_enabled                            = optional(bool)
       smb_continuous_availability_enabled                  = optional(bool)
-      smb_access_based_enumeration_enabled                 = optional(bool) # Default: false
+      smb_access_based_enumeration_enabled                 = optional(bool)
       smb3_protocol_encryption_enabled                     = optional(bool)
       security_style                                       = optional(string)
       protocols                                            = optional(set(string))
       kerberos_enabled                                     = optional(bool)
-      large_volume_enabled                                 = optional(bool) # Default: false
+      large_volume_enabled                                 = optional(bool)
       key_vault_private_endpoint_id                        = optional(string)
       throughput_in_mibps                                  = optional(number)
       encryption_key_source                                = optional(string)
       create_from_snapshot_resource_id                     = optional(string)
-      azure_vmware_data_store_enabled                      = optional(bool) # Default: false
+      azure_vmware_data_store_enabled                      = optional(bool)
       accept_grow_capacity_pool_for_short_term_clone_split = optional(string)
       network_features                                     = optional(string)
       zone                                                 = optional(string)
@@ -785,10 +785,10 @@ EOT
       data_protection_backup_policy = optional(object({
         backup_policy_id = string
         backup_vault_id  = string
-        policy_enabled   = optional(bool) # Default: true
+        policy_enabled   = optional(bool)
       }))
       data_protection_replication = optional(object({
-        endpoint_type             = optional(string) # Default: "dst"
+        endpoint_type             = optional(string)
         remote_volume_location    = string
         remote_volume_resource_id = string
         replication_frequency     = string
@@ -821,7 +821,7 @@ EOT
       volume = list(object({
         capacity_pool_id = string
         data_protection_replication = optional(object({
-          endpoint_type             = optional(string) # Default: "dst"
+          endpoint_type             = optional(string)
           remote_volume_location    = string
           remote_volume_resource_id = string
           replication_frequency     = string
@@ -834,10 +834,10 @@ EOT
           allowed_clients     = string
           nfsv3_enabled       = bool
           nfsv41_enabled      = bool
-          root_access_enabled = optional(bool) # Default: true
+          root_access_enabled = optional(bool)
           rule_index          = number
-          unix_read_only      = optional(bool) # Default: false
-          unix_read_write     = optional(bool) # Default: true
+          unix_read_only      = optional(bool)
+          unix_read_write     = optional(bool)
         }))
         key_vault_private_endpoint_id = optional(string)
         name                          = string
@@ -865,7 +865,7 @@ EOT
       volume = list(object({
         capacity_pool_id = string
         data_protection_replication = optional(object({
-          endpoint_type             = optional(string) # Default: "dst"
+          endpoint_type             = optional(string)
           remote_volume_location    = string
           remote_volume_resource_id = string
           replication_frequency     = string
@@ -878,10 +878,10 @@ EOT
           allowed_clients     = string
           nfsv3_enabled       = bool
           nfsv41_enabled      = bool
-          root_access_enabled = optional(bool) # Default: true
+          root_access_enabled = optional(bool)
           rule_index          = number
-          unix_read_only      = optional(bool) # Default: false
-          unix_read_write     = optional(bool) # Default: true
+          unix_read_only      = optional(bool)
+          unix_read_write     = optional(bool)
         }))
         key_vault_private_endpoint_id = optional(string)
         name                          = string
