@@ -25,19 +25,6 @@ Nested batch_applications (azurerm_batch_application):
         - allow_updates
         - default_version
         - display_name
-Nested batch_certificates (azurerm_batch_certificate):
-    Required:
-        - certificate
-        - certificate_key_vault_id (alternative to certificate - read from Key Vault instead)
-        - certificate_key_vault_secret_name (alternative to certificate - read from Key Vault instead)
-        - format
-        - resource_group_name
-        - thumbprint
-        - thumbprint_algorithm
-    Optional:
-        - password
-        - password_key_vault_id (alternative to password - read from Key Vault instead)
-        - password_key_vault_secret_name (alternative to password - read from Key Vault instead)
 Nested batch_pools (azurerm_batch_pool):
     Required:
         - name
@@ -55,7 +42,6 @@ Nested batch_pools (azurerm_batch_pool):
         - stop_pending_resize_operation
         - target_node_communication_mode
         - auto_scale (block)
-        - certificate (block)
         - container_configuration (block)
         - data_disks (block)
         - disk_encryption (block)
@@ -328,18 +314,6 @@ EOT
       default_version     = optional(string)
       display_name        = optional(string)
     })))
-    batch_certificates = optional(map(object({
-      certificate                       = string
-      certificate_key_vault_id          = optional(string)
-      certificate_key_vault_secret_name = optional(string)
-      format                            = string
-      resource_group_name               = string
-      thumbprint                        = string
-      thumbprint_algorithm              = string
-      password                          = optional(string)
-      password_key_vault_id             = optional(string)
-      password_key_vault_secret_name    = optional(string)
-    })))
     batch_pools = optional(map(object({
       name                           = string
       node_agent_sku_id              = string
@@ -360,9 +334,108 @@ EOT
         sku       = optional(string)
         version   = optional(string)
       })
-      task_scheduling_policy = optional(list(object({
-        node_fill_type = optional(string)
+      auto_scale = optional(object({
+        evaluation_interval = optional(string)
+        formula             = string
+      }))
+      container_configuration = optional(object({
+        container_image_names = optional(set(string))
+        container_registries = optional(list(object({
+          password                  = optional(string)
+          registry_server           = optional(string)
+          user_assigned_identity_id = optional(string)
+          user_name                 = optional(string)
+        })))
+        type = optional(string)
+      }))
+      data_disks = optional(list(object({
+        caching              = optional(string)
+        disk_size_gb         = number
+        lun                  = number
+        storage_account_type = optional(string)
       })))
+      disk_encryption = optional(list(object({
+        disk_encryption_target = string
+      })))
+      extensions = optional(list(object({
+        auto_upgrade_minor_version = optional(bool)
+        automatic_upgrade_enabled  = optional(bool)
+        name                       = string
+        protected_settings         = optional(string)
+        provision_after_extensions = optional(set(string))
+        publisher                  = string
+        settings_json              = optional(string)
+        type                       = string
+        type_handler_version       = optional(string)
+      })))
+      fixed_scale = optional(object({
+        node_deallocation_method  = optional(string)
+        resize_timeout            = optional(string)
+        target_dedicated_nodes    = optional(number)
+        target_low_priority_nodes = optional(number)
+      }))
+      identity = optional(object({
+        identity_ids = set(string)
+        type         = string
+      }))
+      mount = optional(list(object({
+        azure_blob_file_system = optional(object({
+          account_key         = optional(string)
+          account_name        = string
+          blobfuse_options    = optional(string)
+          container_name      = string
+          identity_id         = optional(string)
+          relative_mount_path = string
+          sas_key             = optional(string)
+        }))
+        azure_file_share = optional(list(object({
+          account_key         = string
+          account_name        = string
+          azure_file_url      = string
+          mount_options       = optional(string)
+          relative_mount_path = string
+        })))
+        cifs_mount = optional(list(object({
+          mount_options       = optional(string)
+          password            = string
+          relative_mount_path = string
+          source              = string
+          user_name           = string
+        })))
+        nfs_mount = optional(list(object({
+          mount_options       = optional(string)
+          relative_mount_path = string
+          source              = string
+        })))
+      })))
+      network_configuration = optional(object({
+        accelerated_networking_enabled = optional(bool)
+        dynamic_vnet_assignment_scope  = optional(string)
+        endpoint_configuration = optional(list(object({
+          backend_port        = number
+          frontend_port_range = string
+          name                = string
+          network_security_group_rules = optional(list(object({
+            access                = string
+            priority              = number
+            source_address_prefix = string
+            source_port_ranges    = optional(list(string))
+          })))
+          protocol = string
+        })))
+        public_address_provisioning_type = optional(string)
+        public_ips                       = optional(set(string))
+        subnet_id                        = optional(string)
+      }))
+      node_placement = optional(list(object({
+        policy = optional(string)
+      })))
+      security_profile = optional(object({
+        host_encryption_enabled = optional(bool)
+        secure_boot_enabled     = optional(bool)
+        security_type           = optional(string)
+        vtpm_enabled            = optional(bool)
+      }))
       start_task = optional(object({
         command_line                  = string
         common_environment_properties = optional(map(string))
@@ -396,63 +469,8 @@ EOT
         })
         wait_for_success = optional(bool)
       }))
-      security_profile = optional(object({
-        host_encryption_enabled = optional(bool)
-        secure_boot_enabled     = optional(bool)
-        security_type           = optional(string)
-        vtpm_enabled            = optional(bool)
-      }))
-      node_placement = optional(list(object({
-        policy = optional(string)
-      })))
-      network_configuration = optional(object({
-        accelerated_networking_enabled = optional(bool)
-        dynamic_vnet_assignment_scope  = optional(string)
-        endpoint_configuration = optional(list(object({
-          backend_port        = number
-          frontend_port_range = string
-          name                = string
-          network_security_group_rules = optional(list(object({
-            access                = string
-            priority              = number
-            source_address_prefix = string
-            source_port_ranges    = optional(list(string))
-          })))
-          protocol = string
-        })))
-        public_address_provisioning_type = optional(string)
-        public_ips                       = optional(set(string))
-        subnet_id                        = optional(string)
-      }))
-      mount = optional(list(object({
-        azure_blob_file_system = optional(object({
-          account_key         = optional(string)
-          account_name        = string
-          blobfuse_options    = optional(string)
-          container_name      = string
-          identity_id         = optional(string)
-          relative_mount_path = string
-          sas_key             = optional(string)
-        }))
-        azure_file_share = optional(list(object({
-          account_key         = string
-          account_name        = string
-          azure_file_url      = string
-          mount_options       = optional(string)
-          relative_mount_path = string
-        })))
-        cifs_mount = optional(list(object({
-          mount_options       = optional(string)
-          password            = string
-          relative_mount_path = string
-          source              = string
-          user_name           = string
-        })))
-        nfs_mount = optional(list(object({
-          mount_options       = optional(string)
-          relative_mount_path = string
-          source              = string
-        })))
+      task_scheduling_policy = optional(list(object({
+        node_fill_type = optional(string)
       })))
       user_accounts = optional(list(object({
         elevation_level = string
@@ -467,56 +485,6 @@ EOT
           login_mode = string
         })))
       })))
-      identity = optional(object({
-        identity_ids = set(string)
-        type         = string
-      }))
-      extensions = optional(list(object({
-        auto_upgrade_minor_version = optional(bool)
-        automatic_upgrade_enabled  = optional(bool)
-        name                       = string
-        protected_settings         = optional(string)
-        provision_after_extensions = optional(set(string))
-        publisher                  = string
-        settings_json              = optional(string)
-        type                       = string
-        type_handler_version       = optional(string)
-      })))
-      disk_encryption = optional(list(object({
-        disk_encryption_target = string
-      })))
-      data_disks = optional(list(object({
-        caching              = optional(string)
-        disk_size_gb         = number
-        lun                  = number
-        storage_account_type = optional(string)
-      })))
-      container_configuration = optional(object({
-        container_image_names = optional(set(string))
-        container_registries = optional(list(object({
-          password                  = optional(string)
-          registry_server           = optional(string)
-          user_assigned_identity_id = optional(string)
-          user_name                 = optional(string)
-        })))
-        type = optional(string)
-      }))
-      certificate = optional(list(object({
-        id             = string
-        store_location = string
-        store_name     = optional(string)
-        visibility     = optional(set(string))
-      })))
-      auto_scale = optional(object({
-        evaluation_interval = optional(string)
-        formula             = string
-      }))
-      fixed_scale = optional(object({
-        node_deallocation_method  = optional(string)
-        resize_timeout            = optional(string)
-        target_dedicated_nodes    = optional(number)
-        target_low_priority_nodes = optional(number)
-      }))
       windows = optional(list(object({
         enable_automatic_updates = optional(bool)
       })))
@@ -805,7 +773,6 @@ EOT
         kerberos_5p_read_only_enabled  = optional(bool)
         kerberos_5p_read_write_enabled = optional(bool)
         protocol                       = optional(list(string))
-        protocols_enabled              = optional(list(string))
         root_access_enabled            = optional(bool)
         rule_index                     = number
         unix_read_only                 = optional(bool)
@@ -906,7 +873,6 @@ EOT
     condition = alltrue(concat(
       [for kk in keys(var.batch_accounts) : !strcontains(kk, "/")],
       flatten([for k0, v0 in var.batch_accounts : [for kk in keys(coalesce(v0.batch_applications, {})) : !strcontains(kk, "/")]]),
-      flatten([for k0, v0 in var.batch_accounts : [for kk in keys(coalesce(v0.batch_certificates, {})) : !strcontains(kk, "/")]]),
       flatten([for k0, v0 in var.batch_accounts : [for kk in keys(coalesce(v0.batch_pools, {})) : !strcontains(kk, "/")]]),
       flatten([for k0, v0 in var.batch_accounts : [for k1, v1 in coalesce(v0.batch_pools, {}) : [for kk in keys(coalesce(v1.batch_jobs, {})) : !strcontains(kk, "/")]]]),
       flatten([for k0, v0 in var.batch_accounts : [for kk in keys(coalesce(v0.cosmosdb_cassandra_keyspaces, {})) : !strcontains(kk, "/")]]),

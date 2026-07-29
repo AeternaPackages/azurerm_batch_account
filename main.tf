@@ -10,15 +10,6 @@ locals {
     }
   ]...)
 
-  batch_certificates = merge([
-    for k1, v1 in var.batch_accounts : {
-      for k2, v2 in coalesce(v1.batch_certificates, {}) :
-      "${k1}/${k2}" => merge(v2, {
-        account_name = module.batch_accounts.batch_accounts_name["${k1}"]
-      })
-    }
-  ]...)
-
   batch_pools = merge([
     for k1, v1 in var.batch_accounts : {
       for k2, v2 in coalesce(v1.batch_pools, {}) :
@@ -212,144 +203,138 @@ locals {
 }
 
 module "batch_accounts" {
-  source         = "git::https://github.com/AeternaModules/azurerm_batch_account.git?ref=v4.81.0"
+  source         = "git::https://github.com/AeternaModules/azurerm_batch_account.git?ref=v5.0.0"
   batch_accounts = local.batch_accounts
 }
 
 module "batch_applications" {
-  source             = "git::https://github.com/AeternaModules/azurerm_batch_application.git?ref=v4.81.0"
+  source             = "git::https://github.com/AeternaModules/azurerm_batch_application.git?ref=v5.0.0"
   batch_applications = local.batch_applications
   depends_on         = [module.batch_accounts]
 }
 
-module "batch_certificates" {
-  source             = "git::https://github.com/AeternaModules/azurerm_batch_certificate.git?ref=v4.81.0"
-  batch_certificates = local.batch_certificates
-  depends_on         = [module.batch_accounts]
-}
-
 module "batch_pools" {
-  source      = "git::https://github.com/AeternaModules/azurerm_batch_pool.git?ref=v4.81.0"
+  source      = "git::https://github.com/AeternaModules/azurerm_batch_pool.git?ref=v5.0.0"
   batch_pools = local.batch_pools
   depends_on  = [module.batch_accounts]
 }
 
 module "cosmosdb_cassandra_keyspaces" {
-  source                       = "git::https://github.com/AeternaModules/azurerm_cosmosdb_cassandra_keyspace.git?ref=v4.81.0"
+  source                       = "git::https://github.com/AeternaModules/azurerm_cosmosdb_cassandra_keyspace.git?ref=v5.0.0"
   cosmosdb_cassandra_keyspaces = local.cosmosdb_cassandra_keyspaces
   depends_on                   = [module.batch_accounts]
 }
 
 module "cosmosdb_gremlin_databases" {
-  source                     = "git::https://github.com/AeternaModules/azurerm_cosmosdb_gremlin_database.git?ref=v4.81.0"
+  source                     = "git::https://github.com/AeternaModules/azurerm_cosmosdb_gremlin_database.git?ref=v5.0.0"
   cosmosdb_gremlin_databases = local.cosmosdb_gremlin_databases
   depends_on                 = [module.batch_accounts]
 }
 
 module "cosmosdb_gremlin_graphs" {
-  source                  = "git::https://github.com/AeternaModules/azurerm_cosmosdb_gremlin_graph.git?ref=v4.81.0"
+  source                  = "git::https://github.com/AeternaModules/azurerm_cosmosdb_gremlin_graph.git?ref=v5.0.0"
   cosmosdb_gremlin_graphs = local.cosmosdb_gremlin_graphs
   depends_on              = [module.batch_accounts]
 }
 
 module "cosmosdb_mongo_collections" {
-  source                     = "git::https://github.com/AeternaModules/azurerm_cosmosdb_mongo_collection.git?ref=v4.81.0"
+  source                     = "git::https://github.com/AeternaModules/azurerm_cosmosdb_mongo_collection.git?ref=v5.0.0"
   cosmosdb_mongo_collections = local.cosmosdb_mongo_collections
   depends_on                 = [module.batch_accounts]
 }
 
 module "cosmosdb_mongo_databases" {
-  source                   = "git::https://github.com/AeternaModules/azurerm_cosmosdb_mongo_database.git?ref=v4.81.0"
+  source                   = "git::https://github.com/AeternaModules/azurerm_cosmosdb_mongo_database.git?ref=v5.0.0"
   cosmosdb_mongo_databases = local.cosmosdb_mongo_databases
   depends_on               = [module.batch_accounts]
 }
 
 module "cosmosdb_sql_containers" {
-  source                  = "git::https://github.com/AeternaModules/azurerm_cosmosdb_sql_container.git?ref=v4.81.0"
+  source                  = "git::https://github.com/AeternaModules/azurerm_cosmosdb_sql_container.git?ref=v5.0.0"
   cosmosdb_sql_containers = local.cosmosdb_sql_containers
   depends_on              = [module.batch_accounts]
 }
 
 module "cosmosdb_sql_databases" {
-  source                 = "git::https://github.com/AeternaModules/azurerm_cosmosdb_sql_database.git?ref=v4.81.0"
+  source                 = "git::https://github.com/AeternaModules/azurerm_cosmosdb_sql_database.git?ref=v5.0.0"
   cosmosdb_sql_databases = local.cosmosdb_sql_databases
   depends_on             = [module.batch_accounts]
 }
 
 module "cosmosdb_sql_role_assignments" {
-  source                        = "git::https://github.com/AeternaModules/azurerm_cosmosdb_sql_role_assignment.git?ref=v4.81.0"
+  source                        = "git::https://github.com/AeternaModules/azurerm_cosmosdb_sql_role_assignment.git?ref=v5.0.0"
   cosmosdb_sql_role_assignments = local.cosmosdb_sql_role_assignments
   depends_on                    = [module.batch_accounts]
 }
 
 module "cosmosdb_sql_role_definitions" {
-  source                        = "git::https://github.com/AeternaModules/azurerm_cosmosdb_sql_role_definition.git?ref=v4.81.0"
+  source                        = "git::https://github.com/AeternaModules/azurerm_cosmosdb_sql_role_definition.git?ref=v5.0.0"
   cosmosdb_sql_role_definitions = local.cosmosdb_sql_role_definitions
   depends_on                    = [module.batch_accounts]
 }
 
 module "cosmosdb_sql_stored_procedures" {
-  source                         = "git::https://github.com/AeternaModules/azurerm_cosmosdb_sql_stored_procedure.git?ref=v4.81.0"
+  source                         = "git::https://github.com/AeternaModules/azurerm_cosmosdb_sql_stored_procedure.git?ref=v5.0.0"
   cosmosdb_sql_stored_procedures = local.cosmosdb_sql_stored_procedures
   depends_on                     = [module.batch_accounts]
 }
 
 module "cosmosdb_tables" {
-  source          = "git::https://github.com/AeternaModules/azurerm_cosmosdb_table.git?ref=v4.81.0"
+  source          = "git::https://github.com/AeternaModules/azurerm_cosmosdb_table.git?ref=v5.0.0"
   cosmosdb_tables = local.cosmosdb_tables
   depends_on      = [module.batch_accounts]
 }
 
 module "netapp_backup_policies" {
-  source                 = "git::https://github.com/AeternaModules/azurerm_netapp_backup_policy.git?ref=v4.81.0"
+  source                 = "git::https://github.com/AeternaModules/azurerm_netapp_backup_policy.git?ref=v5.0.0"
   netapp_backup_policies = local.netapp_backup_policies
   depends_on             = [module.batch_accounts]
 }
 
 module "netapp_backup_vaults" {
-  source               = "git::https://github.com/AeternaModules/azurerm_netapp_backup_vault.git?ref=v4.81.0"
+  source               = "git::https://github.com/AeternaModules/azurerm_netapp_backup_vault.git?ref=v5.0.0"
   netapp_backup_vaults = local.netapp_backup_vaults
   depends_on           = [module.batch_accounts]
 }
 
 module "netapp_pools" {
-  source       = "git::https://github.com/AeternaModules/azurerm_netapp_pool.git?ref=v4.81.0"
+  source       = "git::https://github.com/AeternaModules/azurerm_netapp_pool.git?ref=v5.0.0"
   netapp_pools = local.netapp_pools
   depends_on   = [module.batch_accounts]
 }
 
 module "netapp_snapshots" {
-  source           = "git::https://github.com/AeternaModules/azurerm_netapp_snapshot.git?ref=v4.81.0"
+  source           = "git::https://github.com/AeternaModules/azurerm_netapp_snapshot.git?ref=v5.0.0"
   netapp_snapshots = local.netapp_snapshots
   depends_on       = [module.batch_accounts]
 }
 
 module "netapp_snapshot_policies" {
-  source                   = "git::https://github.com/AeternaModules/azurerm_netapp_snapshot_policy.git?ref=v4.81.0"
+  source                   = "git::https://github.com/AeternaModules/azurerm_netapp_snapshot_policy.git?ref=v5.0.0"
   netapp_snapshot_policies = local.netapp_snapshot_policies
   depends_on               = [module.batch_accounts]
 }
 
 module "netapp_volumes" {
-  source         = "git::https://github.com/AeternaModules/azurerm_netapp_volume.git?ref=v4.81.0"
+  source         = "git::https://github.com/AeternaModules/azurerm_netapp_volume.git?ref=v5.0.0"
   netapp_volumes = local.netapp_volumes
   depends_on     = [module.batch_accounts]
 }
 
 module "netapp_volume_group_oracles" {
-  source                      = "git::https://github.com/AeternaModules/azurerm_netapp_volume_group_oracle.git?ref=v4.81.0"
+  source                      = "git::https://github.com/AeternaModules/azurerm_netapp_volume_group_oracle.git?ref=v5.0.0"
   netapp_volume_group_oracles = local.netapp_volume_group_oracles
   depends_on                  = [module.batch_accounts]
 }
 
 module "netapp_volume_group_sap_hanas" {
-  source                        = "git::https://github.com/AeternaModules/azurerm_netapp_volume_group_sap_hana.git?ref=v4.81.0"
+  source                        = "git::https://github.com/AeternaModules/azurerm_netapp_volume_group_sap_hana.git?ref=v5.0.0"
   netapp_volume_group_sap_hanas = local.netapp_volume_group_sap_hanas
   depends_on                    = [module.batch_accounts]
 }
 
 module "batch_jobs" {
-  source     = "git::https://github.com/AeternaModules/azurerm_batch_job.git?ref=v4.81.0"
+  source     = "git::https://github.com/AeternaModules/azurerm_batch_job.git?ref=v5.0.0"
   batch_jobs = local.batch_jobs
   depends_on = [module.batch_pools]
 }

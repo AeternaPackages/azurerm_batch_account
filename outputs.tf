@@ -127,59 +127,6 @@ output "batch_applications_resource_group_name" {
   value       = module.batch_applications.batch_applications_resource_group_name
 }
 
-# --- azurerm_batch_certificate ---
-output "batch_certificates_id" {
-  description = "Map of id values across all batch_certificates, keyed the same as var.batch_certificates"
-  value       = module.batch_certificates.batch_certificates_id
-}
-
-output "batch_certificates_account_name" {
-  description = "Map of account_name values across all batch_certificates, keyed the same as var.batch_certificates"
-  value       = module.batch_certificates.batch_certificates_account_name
-}
-
-output "batch_certificates_certificate" {
-  description = "Map of certificate values across all batch_certificates, keyed the same as var.batch_certificates"
-  value       = module.batch_certificates.batch_certificates_certificate
-  sensitive   = true
-}
-
-output "batch_certificates_format" {
-  description = "Map of format values across all batch_certificates, keyed the same as var.batch_certificates"
-  value       = module.batch_certificates.batch_certificates_format
-}
-
-output "batch_certificates_name" {
-  description = "Map of name values across all batch_certificates, keyed the same as var.batch_certificates"
-  value       = module.batch_certificates.batch_certificates_name
-}
-
-output "batch_certificates_password" {
-  description = "Map of password values across all batch_certificates, keyed the same as var.batch_certificates"
-  value       = module.batch_certificates.batch_certificates_password
-  sensitive   = true
-}
-
-output "batch_certificates_public_data" {
-  description = "Map of public_data values across all batch_certificates, keyed the same as var.batch_certificates"
-  value       = module.batch_certificates.batch_certificates_public_data
-}
-
-output "batch_certificates_resource_group_name" {
-  description = "Map of resource_group_name values across all batch_certificates, keyed the same as var.batch_certificates"
-  value       = module.batch_certificates.batch_certificates_resource_group_name
-}
-
-output "batch_certificates_thumbprint" {
-  description = "Map of thumbprint values across all batch_certificates, keyed the same as var.batch_certificates"
-  value       = module.batch_certificates.batch_certificates_thumbprint
-}
-
-output "batch_certificates_thumbprint_algorithm" {
-  description = "Map of thumbprint_algorithm values across all batch_certificates, keyed the same as var.batch_certificates"
-  value       = module.batch_certificates.batch_certificates_thumbprint_algorithm
-}
-
 # --- azurerm_batch_pool ---
 output "batch_pools_id" {
   description = "Map of id values across all batch_pools, keyed the same as var.batch_pools"
@@ -194,11 +141,6 @@ output "batch_pools_account_name" {
 output "batch_pools_auto_scale" {
   description = "Map of auto_scale values across all batch_pools, keyed the same as var.batch_pools"
   value       = module.batch_pools.batch_pools_auto_scale
-}
-
-output "batch_pools_certificate" {
-  description = "Map of certificate values across all batch_pools, keyed the same as var.batch_pools"
-  value       = module.batch_pools.batch_pools_certificate
 }
 
 output "batch_pools_container_configuration" {
@@ -1132,9 +1074,9 @@ output "netapp_volumes_location" {
   value       = module.netapp_volumes.netapp_volumes_location
 }
 
-output "netapp_volumes_mount_ip_addresses" {
-  description = "Map of mount_ip_addresses values across all netapp_volumes, keyed the same as var.netapp_volumes"
-  value       = module.netapp_volumes.netapp_volumes_mount_ip_addresses
+output "netapp_volumes_mount_target" {
+  description = "Map of mount_target values across all netapp_volumes, keyed the same as var.netapp_volumes"
+  value       = module.netapp_volumes.netapp_volumes_mount_target
 }
 
 output "netapp_volumes_name" {
