@@ -200,6 +200,50 @@ locals {
       }
     ]...)
   ]...)
+
+  cosmosdb_cassandra_tables = merge([
+    for k1, v1 in var.batch_accounts : merge([
+      for k2, v2 in coalesce(v1.cosmosdb_cassandra_keyspaces, {}) : {
+        for k3, v3 in coalesce(v2.cosmosdb_cassandra_tables, {}) :
+        "${k1}/${k2}/${k3}" => merge(v3, {
+          cassandra_keyspace_id = module.cosmosdb_cassandra_keyspaces.cosmosdb_cassandra_keyspaces_id["${k1}/${k2}"]
+        })
+      }
+    ]...)
+  ]...)
+
+  netapp_volume_buckets = merge([
+    for k1, v1 in var.batch_accounts : merge([
+      for k2, v2 in coalesce(v1.netapp_volumes, {}) : {
+        for k3, v3 in coalesce(v2.netapp_volume_buckets, {}) :
+        "${k1}/${k2}/${k3}" => merge(v3, {
+          volume_id = module.netapp_volumes.netapp_volumes_id["${k1}/${k2}"]
+        })
+      }
+    ]...)
+  ]...)
+
+  netapp_volume_bucket_with_servers = merge([
+    for k1, v1 in var.batch_accounts : merge([
+      for k2, v2 in coalesce(v1.netapp_volumes, {}) : {
+        for k3, v3 in coalesce(v2.netapp_volume_bucket_with_servers, {}) :
+        "${k1}/${k2}/${k3}" => merge(v3, {
+          volume_id = module.netapp_volumes.netapp_volumes_id["${k1}/${k2}"]
+        })
+      }
+    ]...)
+  ]...)
+
+  netapp_volume_quota_rules = merge([
+    for k1, v1 in var.batch_accounts : merge([
+      for k2, v2 in coalesce(v1.netapp_volumes, {}) : {
+        for k3, v3 in coalesce(v2.netapp_volume_quota_rules, {}) :
+        "${k1}/${k2}/${k3}" => merge(v3, {
+          volume_id = module.netapp_volumes.netapp_volumes_id["${k1}/${k2}"]
+        })
+      }
+    ]...)
+  ]...)
 }
 
 module "batch_accounts" {
@@ -337,5 +381,29 @@ module "batch_jobs" {
   source     = "git::https://github.com/AeternaModules/azurerm_batch_job.git?ref=v5.0.0"
   batch_jobs = local.batch_jobs
   depends_on = [module.batch_pools]
+}
+
+module "cosmosdb_cassandra_tables" {
+  source                    = "git::https://github.com/AeternaModules/azurerm_cosmosdb_cassandra_table.git?ref=v5.0.0"
+  cosmosdb_cassandra_tables = local.cosmosdb_cassandra_tables
+  depends_on                = [module.cosmosdb_cassandra_keyspaces]
+}
+
+module "netapp_volume_buckets" {
+  source                = "git::https://github.com/AeternaModules/azurerm_netapp_volume_bucket.git?ref=v5.0.0"
+  netapp_volume_buckets = local.netapp_volume_buckets
+  depends_on            = [module.netapp_volumes]
+}
+
+module "netapp_volume_bucket_with_servers" {
+  source                            = "git::https://github.com/AeternaModules/azurerm_netapp_volume_bucket_with_server.git?ref=v5.0.0"
+  netapp_volume_bucket_with_servers = local.netapp_volume_bucket_with_servers
+  depends_on                        = [module.netapp_volumes]
+}
+
+module "netapp_volume_quota_rules" {
+  source                    = "git::https://github.com/AeternaModules/azurerm_netapp_volume_quota_rule.git?ref=v5.0.0"
+  netapp_volume_quota_rules = local.netapp_volume_quota_rules
+  depends_on                = [module.netapp_volumes]
 }
 

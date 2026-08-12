@@ -1287,4 +1287,209 @@ output "batch_jobs_task_retry_maximum" {
   value       = module.batch_jobs.batch_jobs_task_retry_maximum
 }
 
+# --- azurerm_cosmosdb_cassandra_table ---
+output "cosmosdb_cassandra_tables_id" {
+  description = "Map of id values across all cosmosdb_cassandra_tables, keyed the same as var.cosmosdb_cassandra_tables"
+  value       = module.cosmosdb_cassandra_tables.cosmosdb_cassandra_tables_id
+}
+
+output "cosmosdb_cassandra_tables_analytical_storage_ttl" {
+  description = "Map of analytical_storage_ttl values across all cosmosdb_cassandra_tables, keyed the same as var.cosmosdb_cassandra_tables"
+  value       = module.cosmosdb_cassandra_tables.cosmosdb_cassandra_tables_analytical_storage_ttl
+}
+
+output "cosmosdb_cassandra_tables_autoscale_settings" {
+  description = "Map of autoscale_settings values across all cosmosdb_cassandra_tables, keyed the same as var.cosmosdb_cassandra_tables"
+  value       = module.cosmosdb_cassandra_tables.cosmosdb_cassandra_tables_autoscale_settings
+}
+
+output "cosmosdb_cassandra_tables_cassandra_keyspace_id" {
+  description = "Map of cassandra_keyspace_id values across all cosmosdb_cassandra_tables, keyed the same as var.cosmosdb_cassandra_tables"
+  value       = module.cosmosdb_cassandra_tables.cosmosdb_cassandra_tables_cassandra_keyspace_id
+}
+
+output "cosmosdb_cassandra_tables_default_ttl" {
+  description = "Map of default_ttl values across all cosmosdb_cassandra_tables, keyed the same as var.cosmosdb_cassandra_tables"
+  value       = module.cosmosdb_cassandra_tables.cosmosdb_cassandra_tables_default_ttl
+}
+
+output "cosmosdb_cassandra_tables_name" {
+  description = "Map of name values across all cosmosdb_cassandra_tables, keyed the same as var.cosmosdb_cassandra_tables"
+  value       = module.cosmosdb_cassandra_tables.cosmosdb_cassandra_tables_name
+}
+
+output "cosmosdb_cassandra_tables_schema" {
+  description = "Map of schema values across all cosmosdb_cassandra_tables, keyed the same as var.cosmosdb_cassandra_tables"
+  value       = module.cosmosdb_cassandra_tables.cosmosdb_cassandra_tables_schema
+}
+
+output "cosmosdb_cassandra_tables_throughput" {
+  description = "Map of throughput values across all cosmosdb_cassandra_tables, keyed the same as var.cosmosdb_cassandra_tables"
+  value       = module.cosmosdb_cassandra_tables.cosmosdb_cassandra_tables_throughput
+}
+
+# --- azurerm_netapp_volume_bucket ---
+output "netapp_volume_buckets_id" {
+  description = "Map of id values across all netapp_volume_buckets, keyed the same as var.netapp_volume_buckets"
+  value       = module.netapp_volume_buckets.netapp_volume_buckets_id
+}
+
+output "netapp_volume_buckets_file_system_cifs_username" {
+  description = "Map of file_system_cifs_username values across all netapp_volume_buckets, keyed the same as var.netapp_volume_buckets"
+  value       = module.netapp_volume_buckets.netapp_volume_buckets_file_system_cifs_username
+}
+
+output "netapp_volume_buckets_file_system_nfs_user" {
+  description = "Map of file_system_nfs_user values across all netapp_volume_buckets, keyed the same as var.netapp_volume_buckets"
+  value       = module.netapp_volume_buckets.netapp_volume_buckets_file_system_nfs_user
+}
+
+output "netapp_volume_buckets_key_vault" {
+  description = "Map of key_vault values across all netapp_volume_buckets, keyed the same as var.netapp_volume_buckets"
+  value       = module.netapp_volume_buckets.netapp_volume_buckets_key_vault
+}
+
+output "netapp_volume_buckets_name" {
+  description = "Map of name values across all netapp_volume_buckets, keyed the same as var.netapp_volume_buckets"
+  value       = module.netapp_volume_buckets.netapp_volume_buckets_name
+}
+
+output "netapp_volume_buckets_path" {
+  description = "Map of path values across all netapp_volume_buckets, keyed the same as var.netapp_volume_buckets"
+  value       = module.netapp_volume_buckets.netapp_volume_buckets_path
+}
+
+output "netapp_volume_buckets_permissions" {
+  description = "Map of permissions values across all netapp_volume_buckets, keyed the same as var.netapp_volume_buckets"
+  value       = module.netapp_volume_buckets.netapp_volume_buckets_permissions
+}
+
+output "netapp_volume_buckets_server_certificate_common_name" {
+  description = "Map of server_certificate_common_name values across all netapp_volume_buckets, keyed the same as var.netapp_volume_buckets"
+  value       = module.netapp_volume_buckets.netapp_volume_buckets_server_certificate_common_name
+}
+
+output "netapp_volume_buckets_server_certificate_expiry_date" {
+  description = "Map of server_certificate_expiry_date values across all netapp_volume_buckets, keyed the same as var.netapp_volume_buckets"
+  value       = module.netapp_volume_buckets.netapp_volume_buckets_server_certificate_expiry_date
+}
+
+output "netapp_volume_buckets_server_ip_address" {
+  description = "Map of server_ip_address values across all netapp_volume_buckets, keyed the same as var.netapp_volume_buckets"
+  value       = module.netapp_volume_buckets.netapp_volume_buckets_server_ip_address
+}
+
+output "netapp_volume_buckets_status" {
+  description = "Map of status values across all netapp_volume_buckets, keyed the same as var.netapp_volume_buckets"
+  value       = module.netapp_volume_buckets.netapp_volume_buckets_status
+}
+
+output "netapp_volume_buckets_volume_id" {
+  description = "Map of volume_id values across all netapp_volume_buckets, keyed the same as var.netapp_volume_buckets"
+  value       = module.netapp_volume_buckets.netapp_volume_buckets_volume_id
+}
+
+# --- azurerm_netapp_volume_bucket_with_server ---
+output "netapp_volume_bucket_with_servers_id" {
+  description = "Map of id values across all netapp_volume_bucket_with_servers, keyed the same as var.netapp_volume_bucket_with_servers"
+  value       = module.netapp_volume_bucket_with_servers.netapp_volume_bucket_with_servers_id
+}
+
+output "netapp_volume_bucket_with_servers_file_system_cifs_username" {
+  description = "Map of file_system_cifs_username values across all netapp_volume_bucket_with_servers, keyed the same as var.netapp_volume_bucket_with_servers"
+  value       = module.netapp_volume_bucket_with_servers.netapp_volume_bucket_with_servers_file_system_cifs_username
+}
+
+output "netapp_volume_bucket_with_servers_file_system_nfs_user" {
+  description = "Map of file_system_nfs_user values across all netapp_volume_bucket_with_servers, keyed the same as var.netapp_volume_bucket_with_servers"
+  value       = module.netapp_volume_bucket_with_servers.netapp_volume_bucket_with_servers_file_system_nfs_user
+}
+
+output "netapp_volume_bucket_with_servers_key_vault" {
+  description = "Map of key_vault values across all netapp_volume_bucket_with_servers, keyed the same as var.netapp_volume_bucket_with_servers"
+  value       = module.netapp_volume_bucket_with_servers.netapp_volume_bucket_with_servers_key_vault
+}
+
+output "netapp_volume_bucket_with_servers_name" {
+  description = "Map of name values across all netapp_volume_bucket_with_servers, keyed the same as var.netapp_volume_bucket_with_servers"
+  value       = module.netapp_volume_bucket_with_servers.netapp_volume_bucket_with_servers_name
+}
+
+output "netapp_volume_bucket_with_servers_path" {
+  description = "Map of path values across all netapp_volume_bucket_with_servers, keyed the same as var.netapp_volume_bucket_with_servers"
+  value       = module.netapp_volume_bucket_with_servers.netapp_volume_bucket_with_servers_path
+}
+
+output "netapp_volume_bucket_with_servers_permissions" {
+  description = "Map of permissions values across all netapp_volume_bucket_with_servers, keyed the same as var.netapp_volume_bucket_with_servers"
+  value       = module.netapp_volume_bucket_with_servers.netapp_volume_bucket_with_servers_permissions
+}
+
+output "netapp_volume_bucket_with_servers_server" {
+  description = "Map of server values across all netapp_volume_bucket_with_servers, keyed the same as var.netapp_volume_bucket_with_servers"
+  value       = module.netapp_volume_bucket_with_servers.netapp_volume_bucket_with_servers_server
+  sensitive   = true
+}
+
+output "netapp_volume_bucket_with_servers_server_certificate_common_name" {
+  description = "Map of server_certificate_common_name values across all netapp_volume_bucket_with_servers, keyed the same as var.netapp_volume_bucket_with_servers"
+  value       = module.netapp_volume_bucket_with_servers.netapp_volume_bucket_with_servers_server_certificate_common_name
+}
+
+output "netapp_volume_bucket_with_servers_server_certificate_expiry_date" {
+  description = "Map of server_certificate_expiry_date values across all netapp_volume_bucket_with_servers, keyed the same as var.netapp_volume_bucket_with_servers"
+  value       = module.netapp_volume_bucket_with_servers.netapp_volume_bucket_with_servers_server_certificate_expiry_date
+}
+
+output "netapp_volume_bucket_with_servers_server_ip_address" {
+  description = "Map of server_ip_address values across all netapp_volume_bucket_with_servers, keyed the same as var.netapp_volume_bucket_with_servers"
+  value       = module.netapp_volume_bucket_with_servers.netapp_volume_bucket_with_servers_server_ip_address
+}
+
+output "netapp_volume_bucket_with_servers_status" {
+  description = "Map of status values across all netapp_volume_bucket_with_servers, keyed the same as var.netapp_volume_bucket_with_servers"
+  value       = module.netapp_volume_bucket_with_servers.netapp_volume_bucket_with_servers_status
+}
+
+output "netapp_volume_bucket_with_servers_volume_id" {
+  description = "Map of volume_id values across all netapp_volume_bucket_with_servers, keyed the same as var.netapp_volume_bucket_with_servers"
+  value       = module.netapp_volume_bucket_with_servers.netapp_volume_bucket_with_servers_volume_id
+}
+
+# --- azurerm_netapp_volume_quota_rule ---
+output "netapp_volume_quota_rules_id" {
+  description = "Map of id values across all netapp_volume_quota_rules, keyed the same as var.netapp_volume_quota_rules"
+  value       = module.netapp_volume_quota_rules.netapp_volume_quota_rules_id
+}
+
+output "netapp_volume_quota_rules_location" {
+  description = "Map of location values across all netapp_volume_quota_rules, keyed the same as var.netapp_volume_quota_rules"
+  value       = module.netapp_volume_quota_rules.netapp_volume_quota_rules_location
+}
+
+output "netapp_volume_quota_rules_name" {
+  description = "Map of name values across all netapp_volume_quota_rules, keyed the same as var.netapp_volume_quota_rules"
+  value       = module.netapp_volume_quota_rules.netapp_volume_quota_rules_name
+}
+
+output "netapp_volume_quota_rules_quota_size_in_kib" {
+  description = "Map of quota_size_in_kib values across all netapp_volume_quota_rules, keyed the same as var.netapp_volume_quota_rules"
+  value       = module.netapp_volume_quota_rules.netapp_volume_quota_rules_quota_size_in_kib
+}
+
+output "netapp_volume_quota_rules_quota_target" {
+  description = "Map of quota_target values across all netapp_volume_quota_rules, keyed the same as var.netapp_volume_quota_rules"
+  value       = module.netapp_volume_quota_rules.netapp_volume_quota_rules_quota_target
+}
+
+output "netapp_volume_quota_rules_quota_type" {
+  description = "Map of quota_type values across all netapp_volume_quota_rules, keyed the same as var.netapp_volume_quota_rules"
+  value       = module.netapp_volume_quota_rules.netapp_volume_quota_rules_quota_type
+}
+
+output "netapp_volume_quota_rules_volume_id" {
+  description = "Map of volume_id values across all netapp_volume_quota_rules, keyed the same as var.netapp_volume_quota_rules"
+  value       = module.netapp_volume_quota_rules.netapp_volume_quota_rules_volume_id
+}
+
 

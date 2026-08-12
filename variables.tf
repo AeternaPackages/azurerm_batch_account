@@ -71,6 +71,15 @@ Nested cosmosdb_cassandra_keyspaces (azurerm_cosmosdb_cassandra_keyspace):
     Optional:
         - throughput
         - autoscale_settings (block)
+    Nested cosmosdb_cassandra_tables (azurerm_cosmosdb_cassandra_table):
+        Required:
+            - name
+            - schema (block)
+        Optional:
+            - analytical_storage_ttl
+            - default_ttl
+            - throughput
+            - autoscale_settings (block)
 Nested cosmosdb_gremlin_databases (azurerm_cosmosdb_gremlin_database):
     Required:
         - name
@@ -251,6 +260,33 @@ Nested netapp_volumes (azurerm_netapp_volume):
         - data_protection_replication (block)
         - data_protection_snapshot_policy (block)
         - export_policy_rule (block)
+    Nested netapp_volume_buckets (azurerm_netapp_volume_bucket):
+        Required:
+            - name
+        Optional:
+            - file_system_cifs_username
+            - path
+            - permissions
+            - file_system_nfs_user (block)
+            - key_vault (block)
+    Nested netapp_volume_bucket_with_servers (azurerm_netapp_volume_bucket_with_server):
+        Required:
+            - name
+            - server (block)
+        Optional:
+            - file_system_cifs_username
+            - path
+            - permissions
+            - file_system_nfs_user (block)
+            - key_vault (block)
+    Nested netapp_volume_quota_rules (azurerm_netapp_volume_quota_rule):
+        Required:
+            - location
+            - name
+            - quota_size_in_kib
+            - quota_type
+        Optional:
+            - quota_target
 Nested netapp_volume_group_oracles (azurerm_netapp_volume_group_oracle):
     Required:
         - application_identifier
@@ -503,6 +539,28 @@ EOT
       autoscale_settings = optional(object({
         max_throughput = optional(number)
       }))
+      cosmosdb_cassandra_tables = optional(map(object({
+        name                   = string
+        analytical_storage_ttl = optional(number)
+        default_ttl            = optional(number)
+        throughput             = optional(number)
+        schema = object({
+          cluster_key = optional(list(object({
+            name     = string
+            order_by = string
+          })))
+          column = list(object({
+            name = string
+            type = string
+          }))
+          partition_key = list(object({
+            name = string
+          }))
+        })
+        autoscale_settings = optional(object({
+          max_throughput = optional(number)
+        }))
+      })))
     })))
     cosmosdb_gremlin_databases = optional(map(object({
       name                = string
@@ -778,6 +836,50 @@ EOT
         unix_read_only                 = optional(bool)
         unix_read_write                = optional(bool)
       })))
+      netapp_volume_buckets = optional(map(object({
+        name                      = string
+        file_system_cifs_username = optional(string)
+        path                      = optional(string)
+        permissions               = optional(string)
+        file_system_nfs_user = optional(object({
+          group_id = number
+          user_id  = number
+        }))
+        key_vault = optional(object({
+          certificate_key_vault_uri = string
+          certificate_name          = string
+          credentials_key_vault_uri = string
+          credentials_secret_name   = string
+        }))
+      })))
+      netapp_volume_bucket_with_servers = optional(map(object({
+        name                      = string
+        file_system_cifs_username = optional(string)
+        path                      = optional(string)
+        permissions               = optional(string)
+        server = object({
+          certificate_pem                = optional(string)
+          fqdn                           = string
+          on_certificate_conflict_action = optional(string)
+        })
+        file_system_nfs_user = optional(object({
+          group_id = number
+          user_id  = number
+        }))
+        key_vault = optional(object({
+          certificate_key_vault_uri = string
+          certificate_name          = string
+          credentials_key_vault_uri = string
+          credentials_secret_name   = string
+        }))
+      })))
+      netapp_volume_quota_rules = optional(map(object({
+        location          = string
+        name              = string
+        quota_size_in_kib = number
+        quota_type        = string
+        quota_target      = optional(string)
+      })))
     })))
     netapp_volume_group_oracles = optional(map(object({
       application_identifier = string
@@ -876,6 +978,7 @@ EOT
       flatten([for k0, v0 in var.batch_accounts : [for kk in keys(coalesce(v0.batch_pools, {})) : !strcontains(kk, "/")]]),
       flatten([for k0, v0 in var.batch_accounts : [for k1, v1 in coalesce(v0.batch_pools, {}) : [for kk in keys(coalesce(v1.batch_jobs, {})) : !strcontains(kk, "/")]]]),
       flatten([for k0, v0 in var.batch_accounts : [for kk in keys(coalesce(v0.cosmosdb_cassandra_keyspaces, {})) : !strcontains(kk, "/")]]),
+      flatten([for k0, v0 in var.batch_accounts : [for k1, v1 in coalesce(v0.cosmosdb_cassandra_keyspaces, {}) : [for kk in keys(coalesce(v1.cosmosdb_cassandra_tables, {})) : !strcontains(kk, "/")]]]),
       flatten([for k0, v0 in var.batch_accounts : [for kk in keys(coalesce(v0.cosmosdb_gremlin_databases, {})) : !strcontains(kk, "/")]]),
       flatten([for k0, v0 in var.batch_accounts : [for kk in keys(coalesce(v0.cosmosdb_gremlin_graphs, {})) : !strcontains(kk, "/")]]),
       flatten([for k0, v0 in var.batch_accounts : [for kk in keys(coalesce(v0.cosmosdb_mongo_collections, {})) : !strcontains(kk, "/")]]),
@@ -892,6 +995,9 @@ EOT
       flatten([for k0, v0 in var.batch_accounts : [for kk in keys(coalesce(v0.netapp_snapshots, {})) : !strcontains(kk, "/")]]),
       flatten([for k0, v0 in var.batch_accounts : [for kk in keys(coalesce(v0.netapp_snapshot_policies, {})) : !strcontains(kk, "/")]]),
       flatten([for k0, v0 in var.batch_accounts : [for kk in keys(coalesce(v0.netapp_volumes, {})) : !strcontains(kk, "/")]]),
+      flatten([for k0, v0 in var.batch_accounts : [for k1, v1 in coalesce(v0.netapp_volumes, {}) : [for kk in keys(coalesce(v1.netapp_volume_buckets, {})) : !strcontains(kk, "/")]]]),
+      flatten([for k0, v0 in var.batch_accounts : [for k1, v1 in coalesce(v0.netapp_volumes, {}) : [for kk in keys(coalesce(v1.netapp_volume_bucket_with_servers, {})) : !strcontains(kk, "/")]]]),
+      flatten([for k0, v0 in var.batch_accounts : [for k1, v1 in coalesce(v0.netapp_volumes, {}) : [for kk in keys(coalesce(v1.netapp_volume_quota_rules, {})) : !strcontains(kk, "/")]]]),
       flatten([for k0, v0 in var.batch_accounts : [for kk in keys(coalesce(v0.netapp_volume_group_oracles, {})) : !strcontains(kk, "/")]]),
       flatten([for k0, v0 in var.batch_accounts : [for kk in keys(coalesce(v0.netapp_volume_group_sap_hanas, {})) : !strcontains(kk, "/")]])
     ))
