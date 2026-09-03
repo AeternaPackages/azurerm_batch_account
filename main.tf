@@ -32,24 +32,24 @@ locals {
 }
 
 module "batch_accounts" {
-  source         = "git::https://github.com/AeternaModules/azurerm_batch_account.git?ref=v5.0.0"
+  source         = "git::https://github.com/AeternaModules/azurerm_batch_account.git?ref=v5.0.1"
   batch_accounts = local.batch_accounts
 }
 
 module "batch_applications" {
-  source             = "git::https://github.com/AeternaModules/azurerm_batch_application.git?ref=v5.0.0"
+  source             = "git::https://github.com/AeternaModules/azurerm_batch_application.git?ref=v5.0.1"
   batch_applications = local.batch_applications
   depends_on         = [module.batch_accounts]
 }
 
 module "batch_pools" {
-  source      = "git::https://github.com/AeternaModules/azurerm_batch_pool.git?ref=v5.0.0"
+  source      = "git::https://github.com/AeternaModules/azurerm_batch_pool.git?ref=v5.0.1"
   batch_pools = local.batch_pools
   depends_on  = [module.batch_accounts]
 }
 
 module "batch_jobs" {
-  source     = "git::https://github.com/AeternaModules/azurerm_batch_job.git?ref=v5.0.0"
+  source     = "git::https://github.com/AeternaModules/azurerm_batch_job.git?ref=v5.0.1"
   batch_jobs = local.batch_jobs
   depends_on = [module.batch_pools]
 }
